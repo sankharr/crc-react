@@ -1,0 +1,14 @@
+.logoImage {
+    width: 10rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 40px;
+}
+
+.adminText{
+    padding-left: 0.5rem;
+    /* font-weight: ; */
+
+    /* align-items: flex-start; */
+}
