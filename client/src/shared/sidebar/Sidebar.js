@@ -12,7 +12,21 @@ import Logo from "../../assets/logo.png";
 import Typography from "@mui/material/Typography";
 import "./Sidebar.css";
 
+import CalendarMonth from "@mui/icons-material/CalendarMonth";
+import History from "@mui/icons-material/History";
+import Warehouse from "@mui/icons-material/Warehouse";
+import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
+import SettingsIcon from '@mui/icons-material/Settings';
+
 const drawerWidth = 240;
+
+const menuItems = [
+  { title: "Reservation Calendar", icon: <CalendarMonth />},
+  { title: "Current Reservations", icon: <DnsRoundedIcon />},
+  { title: "Past Reservations", icon: <History />},
+  { title: "All Inventory", icon: <Warehouse />},
+  { title: "Settings", icon: <SettingsIcon />}
+]
 
 export default function Sidebar(props) {
   return (
@@ -45,18 +59,18 @@ export default function Sidebar(props) {
       </Toolbar>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {menuItems.map((menuItem, index) => (
           <ListItem
             button
-            key={text}
+            key={menuItem.title}
             onClick={() => {
-              props.onTitleChange(text);
+              props.onTitleChange(menuItem.title);
             }}
           >
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              {menuItem.icon}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={menuItem.title} />
           </ListItem>
         ))}
       </List>
