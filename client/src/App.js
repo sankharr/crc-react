@@ -4,13 +4,23 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from './shared/navbar/Navbar'
 import Sidebar from './shared/sidebar/Sidebar'
 import ContentBody from './shared/contentBody/ContentBody';
+import {
+  useParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
 export default function App() {
 
+  let navigate = useNavigate();
+  let location = useLocation();
+  let params = useParams();
+
   const [menuName, setMenuName] = React.useState('');
 
-  const settingNavbarTitle = (title) => {
-    setMenuName(title);
+  const gettingDataFromSidebar = (menuItemObject) => {
+    setMenuName(menuItemObject.title);
+    navigate(menuItemObject.path)
   }
 
 
@@ -18,7 +28,7 @@ export default function App() {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Navbar menuName={menuName} />
-      <Sidebar onTitleChange={settingNavbarTitle} />
+      <Sidebar onMenuItemChange={gettingDataFromSidebar} />
       <ContentBody />
     </Box>
   );

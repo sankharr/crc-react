@@ -21,11 +21,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 const drawerWidth = 240;
 
 const menuItems = [
-  { title: "Reservation Calendar", icon: <CalendarMonth />},
-  { title: "Current Reservations", icon: <DnsRoundedIcon />},
-  { title: "Past Reservations", icon: <History />},
-  { title: "All Inventory", icon: <Warehouse />},
-  { title: "Settings", icon: <SettingsIcon />}
+  { title: "Reservation Calendar", icon: <CalendarMonth />, path: "/reservationCalendar"},
+  { title: "Current Reservations", icon: <DnsRoundedIcon />, path: "/currentReservations"},
+  { title: "Past Reservations", icon: <History />, path: "/pastReservations"},
+  { title: "All Inventory", icon: <Warehouse />, path: "/inventory"},
+  { title: "Settings", icon: <SettingsIcon />, path: "/settings"}
 ]
 
 export default function Sidebar(props) {
@@ -52,7 +52,6 @@ export default function Sidebar(props) {
           gutterBottom
           align="justify"
           className="adminText"
-          // className="adminText"
         ><b>Admin Console</b>
           
         </Typography>
@@ -64,7 +63,7 @@ export default function Sidebar(props) {
             button
             key={menuItem.title}
             onClick={() => {
-              props.onTitleChange(menuItem.title);
+              props.onMenuItemChange(menuItem);
             }}
           >
             <ListItemIcon>
