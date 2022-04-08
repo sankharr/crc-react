@@ -1,26 +1,23 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import bodyParser from "body-parser";
-import dotenv from "dotenv";
-
+const express = require("express");
+const mongoose = require("mongoose");
+const router = require("./routes/book-routes");
+const cors = require("cors");
+const dotenv = require("dotenv");
 const app = express();
 dotenv.config();
+// Middlewares
 
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+//This will convert to json
+app.use(express.json());
 app.use(cors());
-
-const PORT = process.env.PORT;
+app.use("/books", router); // localhost:5000/books
 
 mongoose
-  .connect(process.env.CONNECTION_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    process.env.CONNECTION_URL
+  )
+  .then(() => console.log("Connected To Database"))
   .then(() => {
-    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+    app.listen(process.env.PORT);
   })
-  .catch((error) => console.log(error.message));
-
-// mongoose.set('useFindAndModify', false);
+  .catch((err) => console.log(err));
