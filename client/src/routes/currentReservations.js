@@ -10,6 +10,13 @@ import {
 } from "@table-library/react-table-library/table";
 import TextField from "@mui/material/TextField";
 import { Toolbar } from "@mui/material";
+import axios from 'axios';
+
+const URL = "http://localhost:5000/books";
+
+const fetchHandler = async() => {
+  return await axios.get(URL).then((res) => res.data)
+}
 
 const list = [
   {
@@ -38,7 +45,16 @@ const list = [
 function CurrentReservations() {
   // const data = { nodes: list };
 
+  const [books, setBooks] = React.useState();
   const [search, setSearch] = React.useState("");
+
+  // React.useEffect(() => {
+  //   fetchHandler().then((data) => setBooks(data));
+  // },[]);
+  // console.log(books);
+
+  
+  
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
