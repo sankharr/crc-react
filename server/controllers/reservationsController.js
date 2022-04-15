@@ -31,16 +31,21 @@ const getById = async (req, res, next) => {
 }
 
 const addReservation = async (req, res, next) => {
-    const { itemName, startDate, endDate, price, quantity, customerName } = req.body;
+    const { itemName, startDate, endDate, days, amount, quantity, customerName, eventColor, status } = req.body;
+    const lastUpdatedDate = new Date();
     let reservation;
     try {
         reservation = new Reservation({
             itemName,
             startDate,
             endDate,
-            price,
+            days,
+            amount,
             quantity,
-            customerName
+            customerName,
+            eventColor,
+            lastUpdatedDate,
+            status
         });
 
         await reservation.save();

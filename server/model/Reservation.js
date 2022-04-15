@@ -15,14 +15,29 @@ const reservationSchema = new Schema({
         type: String,
         required: true
     },
-    price: {
+    days: {
+        type: Number,
+    },
+    amount: {
         type: Number,
         required: true
     },
     quantity: {
         type: Number,
+        required: true
     },
     customerName : {
+        type: String,
+        required: true
+    },
+    eventColor: {
+        type: String,
+    },
+    lastUpdatedDate: {
+        type: Date,
+        required: true
+    },
+    status: {
         type: String,
         required: true
     }

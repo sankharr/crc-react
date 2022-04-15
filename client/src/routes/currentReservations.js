@@ -19,7 +19,7 @@ import Info from "@mui/icons-material/Info";
 import Tooltip from "@mui/material/Tooltip";
 
 import TextField from "@mui/material/TextField";
-import { Toolbar } from "@mui/material";
+import { Input, Toolbar } from "@mui/material";
 import axios from "axios";
 import { useTableSearch } from "../shared/useTableSearch";
 import Box from "@mui/material/Box";
@@ -36,6 +36,8 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import "./currentReservations.css";
 import { red } from "@mui/material/colors";
+import InputAdornment from '@mui/material/InputAdornment';
+import Search from '@mui/icons-material/Search';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -175,14 +177,19 @@ export default class CurrentReservations extends Component {
   render() {
     return (
       <div>
-        <TextField
+        <Input
             id="standard-basic"
+            className="mt-2 mb-4"
             label="Search"
-            variant="standard"
             onChange={this.handleSearch}
+            placeholder="Search..."
+            startAdornment={
+              <InputAdornment position="start">
+                <Search />
+              </InputAdornment>
+            }
           />
 
-        <Toolbar />
         <table
           className="table align-middle table-hover table-striped"
           style={{}}
@@ -206,7 +213,7 @@ export default class CurrentReservations extends Component {
                 <td>{reservation.endDate}</td>
                 <td>{reservation.quantity}</td>
                 <td>N/A</td>
-                <td>{reservation.price}</td>
+                <td>{reservation.amount}</td>
                 <td>
                   <div className="row">
                     <div className="col colNeg">
