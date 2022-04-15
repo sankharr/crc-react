@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useDispatch } from 'react-redux'
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -6,18 +7,18 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import Logo from "../../assets/logo.png";
 import Typography from "@mui/material/Typography";
-import "./Sidebar.css";
-
 import CalendarMonth from "@mui/icons-material/CalendarMonth";
 import History from "@mui/icons-material/History";
 import Warehouse from "@mui/icons-material/Warehouse";
 import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
 import SettingsIcon from '@mui/icons-material/Settings';
 
+import Logo from "../../assets/logo.png";
+import "./Sidebar.css";
+import { updateHeaderTitle, updateNavigatePath } from './sidebarSlice'
+
+// This will determine the width of the sidebar
 const drawerWidth = 240;
 
 const menuItems = [
@@ -29,6 +30,9 @@ const menuItems = [
 ]
 
 export default function Sidebar(props) {
+
+  const dispatch = useDispatch();
+
   return (
     <Drawer
       sx={{
@@ -62,8 +66,12 @@ export default function Sidebar(props) {
           <ListItem
             button
             key={menuItem.title}
-            onClick={() => {
-              props.onMenuItemChange(menuItem);
+            // onClick={() => {
+            //   props.onMenuItemChange(menuItem);
+            // }}
+            onClick={()=> {
+              dispatch(updateHeaderTitle(menuItem.title));
+              dispatch(updateNavigatePath(menuItem.path));
             }}
           >
             <ListItemIcon>

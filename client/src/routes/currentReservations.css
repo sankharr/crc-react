@@ -1,0 +1,16 @@
+table {
+    text-align: center;
+}
+
+.colNeg {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+}
+
+.colNegCorner {
+    margin-left: -1.5rem;
+}
+
+.MuiTooltip-popper {
+    /* offset: 2rem; */
+}

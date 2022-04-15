@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const bookSchema = new Schema({
-    name: {
+const reservationSchema = new Schema({
+    itemName: {
         type: String,
         required: true
     },
-    author: {
+    startDate: {
         type: String,
         required: true
     },
-    description: {
+    endDate: {
         type: String,
         required: true
     },
@@ -19,13 +19,13 @@ const bookSchema = new Schema({
         type: Number,
         required: true
     },
-    available: {
-        type: Boolean,
+    quantity: {
+        type: Number,
     },
-    image : {
+    customerName : {
         type: String,
         required: true
     }
 });
 
-module.exports = mongoose.model("Book", bookSchema);
+module.exports = mongoose.model("Reservation", reservationSchema);

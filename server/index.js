@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./routes/book-routes");
+const router = require("./routes/reservation-routes");
 const cors = require("cors");
 const dotenv = require("dotenv");
+// const bodyParser = require('body-parser');
 const app = express();
 dotenv.config();
 // Middlewares
@@ -10,7 +11,7 @@ dotenv.config();
 //This will convert to json
 app.use(express.json());
 app.use(cors());
-app.use("/books", router); // localhost:5000/books
+app.use("/reservations", router); // localhost:5000/reservations
 
 mongoose
   .connect(
