@@ -19,7 +19,7 @@ import Info from "@mui/icons-material/Info";
 import Tooltip from "@mui/material/Tooltip";
 
 import TextField from "@mui/material/TextField";
-import { Input, Toolbar } from "@mui/material";
+import { Button, Input, Toolbar } from "@mui/material";
 import axios from "axios";
 import { useTableSearch } from "../shared/useTableSearch";
 import Box from "@mui/material/Box";
@@ -36,8 +36,19 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import "./currentReservations.css";
 import { red } from "@mui/material/colors";
-import InputAdornment from '@mui/material/InputAdornment';
-import Search from '@mui/icons-material/Search';
+import InputAdornment from "@mui/material/InputAdornment";
+import Search from "@mui/icons-material/Search";
+import CreateReservation from "./createReservation";
+import Add from "@mui/icons-material/Add";
+import { connect } from "react-redux";
+import { updateNavigatePath } from '../shared/sidebar/sidebarSlice'
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { withRouter } from "./withRouter";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -53,52 +64,18 @@ const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
 };
 
-const { list } = [
-  {
-    id: "1",
-    name: "VSCode",
-    deadline: new Date(2020, 1, 17),
-    type: "SETUP",
-    isComplete: true,
-  },
-  {
-    id: "2",
-    name: "JavaScript",
-    deadline: new Date(2020, 2, 28),
-    type: "LEARN",
-    isComplete: true,
-  },
-  {
-    id: "3",
-    name: "React",
-    deadline: new Date(2020, 3, 8),
-    type: "LEARN",
-    isComplete: false,
-  },
-];
 
-// const { Search } = Input;
+class CurrentReservations extends Component {
 
-const fetchUsers = async () => {
-  const { data } = await axios.get(
-    "https://jsonplaceholder.typicode.com/users/"
-  );
-  console.log("data => ", data);
-  return { data };
-};
-
-export default class CurrentReservations extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
       currentReservations: [],
+      createReservationModalOpen: false,
     };
   }
-  // const data = { nodes: list };
 
-  // const [books, setBooks] = useState();
-  // const [search, setSearch] = useState("");
-  // const [posts, setPosts ] = useState([]);
 
   componentDidMount() {
     fetchHandler()
@@ -113,82 +90,57 @@ export default class CurrentReservations extends Component {
       );
   }
 
-  // useEffect(() => {
-  //   fetchHandler().then((res) => {
-  //     // console.log("res => ",res)
-  //     setBooks(res)
-
-  //     // console.log("books => ",books)
-
-  //   }).then(() => console.log("books1 => ",books))
-  // }, []);
-
-  // const retrievePosts = async () => {
-  //   await axios.get("http://localhost:5000/reservations").then((res) => {
-  //     // console.log("res => ",res)
-  //     setPosts(res.data);
-  //     // if(res.data){
-
-  //     // }
-  //     // console.log("posts => ",posts);
-  //   })
-  //   // .then((res))
-  // }
-
-  // useEffect(() => {
-  //   retrievePosts().then(()=>console.log("posts => ",posts));
-
-  // },[])
-
-  // console.log(list);
-
-  // const handleSearch = (event) => {
-  //   setSearch(event.target.value);
-  // };
-
-  // // const data = {
-  // //   nodes: list.filter((item) =>
-  // //     item.name.toLowerCase().includes(search.toLowerCase())
-  // //   ),
-  // // };
-
-  // const [searchVal, setSearchVal] = React.useState(null);
-
-  // const { filteredData, loading } = useTableSearch({
-  //   searchVal,
-  //   retrieve: list,
-  // });
+  handleCRModalClick = () => {
+    this.setState({
+      createReservationModalOpen: !this.state.createReservationModalOpen,
+    });
+  };
 
   filterData(posts, searchKey) {
-    const results = posts.filter((post) => 
+    const results = posts.filter((post) =>
       post.itemName.toLowerCase().includes(searchKey.toLowerCase())
     );
-    this.setState({currentReservations: results});
+    this.setState({ currentReservations: results });
   }
 
-  handleSearch = async (e) =>  {
+  handleSearch = async (e) => {
     const searchKey = e.target.value;
 
-    await axios.get(URL).then(res => {
-        this.filterData(res.data.reservations, searchKey)
-    })
+    await axios.get(URL).then((res) => {
+      this.filterData(res.data.reservations, searchKey);
+    });
   };
 
   render() {
     return (
       <div>
-        <Input
-            id="standard-basic"
-            className="mt-2 mb-4"
-            label="Search"
-            onChange={this.handleSearch}
-            placeholder="Search..."
-            startAdornment={
-              <InputAdornment position="start">
-                <Search />
-              </InputAdornment>
-            }
-          />
+        <Toolbar className="mt-2 mb-4">
+          <div className="col" sx={{ flexGrow: 1 }}>
+            <Input
+              id="standard-basic"
+              label="Search"
+              onChange={this.handleSearch}
+              placeholder="Search..."
+              startAdornment={
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              }
+            />
+          </div>
+
+          <Button
+            variant="contained"
+            startIcon={<Add />}
+            onClick={() => this.props.navigate('/createReservation')}
+          >
+            New Reservation
+          </Button>
+          {/* <CreateReservation
+            openVariable={this.state.createReservationModalOpen}
+            onCloseFunction={this.handleCRModalClick}
+          /> */}
+        </Toolbar>
 
         <table
           className="table align-middle table-hover table-striped"
@@ -212,7 +164,7 @@ export default class CurrentReservations extends Component {
                 <td>{reservation.startDate}</td>
                 <td>{reservation.endDate}</td>
                 <td>{reservation.quantity}</td>
-                <td>N/A</td>
+                <td>{reservation.days}</td>
                 <td>{reservation.amount}</td>
                 <td>
                   <div className="row">
@@ -226,80 +178,50 @@ export default class CurrentReservations extends Component {
                     <div className="col colNeg">
                       <Tooltip title="Edit">
                         <IconButton>
-                          <Edit color="primary"/>
+                          <Edit color="primary" />
                         </IconButton>
                       </Tooltip>
                     </div>
                     <div className="col colNeg">
                       <Tooltip title="Done">
                         <IconButton>
-                          <CheckCircle color="success"/>
+                          <CheckCircle color="success" />
                         </IconButton>
                       </Tooltip>
                     </div>
                     <div className="col colNeg">
                       <Tooltip title="Cancel">
                         <IconButton>
-                          <DoDisturb sx={{color: "red"}} />
+                          <DoDisturb sx={{ color: "red" }} />
                         </IconButton>
                       </Tooltip>
                     </div>
                     <div className="col colNegCorner">
                       <Tooltip title="Delete">
                         <IconButton>
-                          <DeleteIcon sx={{color: "black"}}/>
+                          <DeleteIcon sx={{ color: "black" }} />
                         </IconButton>
                       </Tooltip>
                     </div>
-                    
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="row">
+          <div className="col"></div>
+        </div>
       </div>
     );
   }
-
-  // return (
-  //   <Table data={data}>
-  //     {(tableList) => (
-  //       <>
-  //         <TextField
-  //           id="standard-basic"
-  //           label="Search"
-  //           variant="standard"
-  //           onChange={handleSearch}
-  //         />
-  //         <Toolbar />
-  //         <Header>
-  //           <HeaderRow>
-  //             <HeaderCell>Task</HeaderCell>
-  //             <HeaderCell>Deadline</HeaderCell>
-  //             <HeaderCell>Type</HeaderCell>
-  //             <HeaderCell>Complete</HeaderCell>
-  //           </HeaderRow>
-  //         </Header>
-
-  //         <Body>
-  //           {tableList.map((item) => (
-  //             <Row key={item.id} item={item}>
-  //               <Cell>{item.name}</Cell>
-  //               <Cell>
-  //                 {item.deadline.toLocaleDateString("en-US", {
-  //                   year: "numeric",
-  //                   month: "2-digit",
-  //                   day: "2-digit",
-  //                 })}
-  //               </Cell>
-  //               <Cell>{item.type}</Cell>
-  //               <Cell>{item.isComplete.toString()}</Cell>
-  //             </Row>
-  //           ))}
-  //         </Body>
-  //       </>
-  //     )}
-  //   </Table>
-  // );
 }
+
+// function mapStateToProps(state){
+//   return {
+//     pathState: state.sidebar.navigatePath
+//   }
+// }
+
+export default withRouter(CurrentReservations);
+// export default CurrentReservations;

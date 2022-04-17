@@ -14,6 +14,7 @@ import CurrentReservations from "./routes/currentReservations";
 import PastReservations from "./routes/pastReservations";
 import Inventory from "./routes/inventory";
 import Settings from "./routes/settings";
+import CreateReservation from "./routes/createReservation";
 
 const container = document.getElementById("root");
 
@@ -38,6 +39,7 @@ root.render(
             <Route path="pastReservations" element={<PastReservations />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="createReservation" element={<CreateReservation />} />
           </Route>
         </Routes>
         {/* <App /> */}
