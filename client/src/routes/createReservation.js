@@ -309,9 +309,10 @@ const CreateReservation = (props) => {
             Back
           </Button>
         </Grid>
-        {submitCompleted ? (isError ? <CompletetionAlert isError={true} /> : <CompletetionAlert isError={false} />) : <CreateReservationForm />}
+        
         {/* <CreateReservationForm /> */}
       </Grid>
+      {submitCompleted ? (isError ? <CompletetionAlert isError={true} /> : <CompletetionAlert isError={false} />) : <CreateReservationForm />}
     </>
   );
 };

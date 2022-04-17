@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./routes/reservation-routes");
+const reservationRouter = require("./routes/reservation-routes");
+const deviceRouter = require("./routes/device-routes");
 const cors = require("cors");
 const dotenv = require("dotenv");
 // const bodyParser = require('body-parser');
@@ -11,7 +12,8 @@ dotenv.config();
 //This will convert to json
 app.use(express.json());
 app.use(cors());
-app.use("/reservations", router); // localhost:5000/reservations
+app.use("/reservations", reservationRouter); // localhost:5000/reservations
+app.use("/devices", deviceRouter); // localhost:5000/devices
 
 mongoose
   .connect(
