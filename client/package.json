@@ -9,9 +9,6 @@
     "@mui/material": "^5.5.3",
     "@reduxjs/toolkit": "^1.8.1",
     "@table-library/react-table-library": "^2.0.20",
-    "@testing-library/jest-dom": "^5.16.3",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "formik": "^2.2.9",
     "react": "^18.0.0",
@@ -45,5 +42,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^14.1.1"
   }
 }

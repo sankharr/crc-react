@@ -25,7 +25,7 @@ const menuItems = [
   { title: "Reservation Calendar", icon: <CalendarMonth />, path: "/reservationCalendar"},
   { title: "Current Reservations", icon: <DnsRoundedIcon />, path: "/currentReservations"},
   { title: "Past Reservations", icon: <History />, path: "/pastReservations"},
-  { title: "All Inventory", icon: <Warehouse />, path: "/inventory"},
+  { title: "All Inventory", icon: <Warehouse />, path: "/deviceBrowser"},
   { title: "Settings", icon: <SettingsIcon />, path: "/settings"}
 ]
 

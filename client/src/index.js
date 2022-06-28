@@ -8,13 +8,14 @@ import store from "./store";
 import { Provider } from "react-redux";
 
 //Route imports
-import TestPage from "./routes/testPage";
-import ReservationCalendar from "./routes/reservationCalendar";
-import CurrentReservations from "./routes/currentReservations";
-import PastReservations from "./routes/pastReservations";
-import Inventory from "./routes/inventory";
-import Settings from "./routes/settings";
-import CreateReservation from "./routes/createReservation";
+import TestPage from "./pages/testPage";
+import ReservationCalendar from "./pages/reservations/reservationCalendar";
+import CurrentReservations from "./pages/reservations/currentReservations";
+import PastReservations from "./pages/reservations/pastReservations";
+import Settings from "./pages/settings";
+import CreateReservation from "./pages/reservations/createReservation";
+import DeviceBrowser from "./pages/devices/deviceBrowser";
+import AddDevice from "./pages/devices/addDevice";
 
 const container = document.getElementById("root");
 
@@ -22,9 +23,10 @@ const container = document.getElementById("root");
 const root = ReactDOMClient.createRoot(container);
 
 root.render(
+  <React.StrictMode>
   <Provider store={store}>
     <BrowserRouter>
-      <React.StrictMode>
+      
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="testPage" element={<TestPage />} />
@@ -37,15 +39,17 @@ root.render(
               element={<CurrentReservations />}
             />
             <Route path="pastReservations" element={<PastReservations />} />
-            <Route path="inventory" element={<Inventory />} />
+            <Route path="deviceBrowser" element={<DeviceBrowser />} />
             <Route path="settings" element={<Settings />} />
             <Route path="createReservation" element={<CreateReservation />} />
+            <Route path="addDevice" element={<AddDevice />} />
           </Route>
         </Routes>
-        {/* <App /> */}
-      </React.StrictMode>
+        <App />
+      
     </BrowserRouter>
   </Provider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
