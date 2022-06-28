@@ -29,3 +29,8 @@
 /client/yarn-error.log*
 
 /server/.env
+
+# microservices
+server/microservices/device-service/node_modules
+server/microservices/reservation-service/node_modules
+server/microservices/auth-service/node_modules
