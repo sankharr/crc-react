@@ -4,8 +4,7 @@
 /.vscode/settings.json
 
 # dependencies
-/client/node_modules
-/server/node_modules
+*node_modules
 /client/.pnp
 /client/.pnp.js
 
@@ -30,7 +29,4 @@
 
 /server/.env
 
-# microservices
-server/microservices/device-service/node_modules
-server/microservices/reservation-service/node_modules
-server/microservices/auth-service/node_modules
+*Readme.js

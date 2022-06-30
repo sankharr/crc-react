@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require("cors");
+// const cors = require("cors");
 const dotenv = require("dotenv");
 const PORT = process.env.PORT_ONE || 7070;
 const path = require('path');
@@ -14,7 +14,7 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 //This will convert to json
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 
 app.post("/auth/login", async (req, res) => {
     const { email, password } = req.body;
@@ -54,7 +54,7 @@ app.post("/auth/register", async (req, res) => {
 
 mongoose
   .connect(
-    process.env.CONNECTION_URL,
+    process.env.CONNECTION_URL_AUTH,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
