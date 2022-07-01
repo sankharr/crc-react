@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+var cors = require('cors')
 const dotenv = require("dotenv");
 const PORT = process.env.PORT_ONE || 9090;
 const path = require("path");
@@ -12,9 +13,31 @@ var order;
 var channel, connection;
 
 const app = express();
+app.use(cors())
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 app.use(express.json());
+// app.configure(function() {
+//     app.use(allowCrossDomain);
+//     //some other code
+// });  
+
+
+app.get("/reservation", async (req, res) => {
+  let reservations;
+  try {
+    reservations = await Reservation.find();
+  } catch (error) {
+    console.log(err);
+  }
+
+  if (!reservations) {
+    return res.status(404).json({ message: "No reservations found" });
+  }
+//   console.log("reservations - ",reservations)
+  return res.status(200).json({ reservations });
+});
+
 
 function createReservation(data) {
   const newOrder = new Reservation({
@@ -45,11 +68,18 @@ connect().then(() => {
     const newReservation = createReservation(JSON.parse(data.content));
     channel.ack(data);
     channel.sendToQueue(
-        "PRODUCT",
-        Buffer.from(JSON.stringify({ newReservation }))
+      "PRODUCT",
+      Buffer.from(JSON.stringify({ newReservation }))
     );
   });
 });
+
+let allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
 
 // connecting to MongoDB
 mongoose.connect(

@@ -26,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const URL = "http://localhost:5000/devices";
+const URL = "http://localhost:8080/product";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
@@ -47,7 +47,7 @@ class DeviceBrowser extends Component {
   componentDidMount() {
     fetchHandler()
       .then((res) => {
-        this.setState({ allDevices: res.devices });
+        this.setState({ allDevices: res.products });
       })
       .then(() =>
         console.log("allDevices => ", this.state.allDevices)

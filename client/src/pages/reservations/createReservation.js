@@ -17,7 +17,7 @@ import { BrowserRouter as Router, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Alert, AlertTitle } from "@mui/material";
 
-const URL = "http://localhost:5000/reservations";
+const URL = "http://localhost:8080/product/reserve";
 
 const CompletetionAlert = (props) => {
 
@@ -66,7 +66,7 @@ const CreateReservation = (props) => {
         quantity: formObject.quantity,
         customerName: formObject.customerName,
         eventColor: formObject.eventColor,
-        lastUpdatedDate: new Date(),
+        // lastUpdatedDate: new Date(),
         status: "Active",
       };
       console.log("dataObject => ", dataObject);

@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+var cors = require("cors");
 const dotenv = require("dotenv");
 const PORT = process.env.PORT_ONE || 8080;
 const path = require("path");
@@ -12,9 +13,26 @@ var order;
 var channel, connection;
 
 const app = express();
+app.use(cors());
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 app.use(express.json());
+
+// route to get all products
+app.get("/product", async (req, res) => {
+    let products;
+    try {
+      products = await Product.find();
+    } catch (error) {
+      console.log(err);
+    }
+  
+    if (!products) {
+      return res.status(404).json({ message: "No devices found" });
+    }
+    // console.log("products - ",products)
+    return res.status(200).json({ products });
+  });
 
 // function to create the Product queue
 async function connect() {
@@ -27,7 +45,7 @@ async function connect() {
 connect().catch((err) => console.log("error from amqp Connect - ", err));
 
 // route to reserve a product
-app.post("/product/reserve", isAuthenticated, async (req, res) => {
+app.post("/product/reserve", async (req, res) => {
   const {
     itemName,
     startDate,
@@ -39,7 +57,6 @@ app.post("/product/reserve", isAuthenticated, async (req, res) => {
     eventColor,
     status,
   } = req.body;
-  //   const products = await Product.find({ _id: { $in: ids } });
   channel.sendToQueue(
     "RESERVATION",
     Buffer.from(
@@ -58,13 +75,13 @@ app.post("/product/reserve", isAuthenticated, async (req, res) => {
   );
   channel.consume("PRODUCT", (data) => {
     reservation = JSON.parse(data.content);
-    console.log("Consuming data from PRODUCT - ",reservation)
+    console.log("Consuming data from PRODUCT - ", reservation);
   });
   return res.json(order);
 });
 
 // route to create a product
-app.post("/product/create", isAuthenticated, async (req, res) => {
+app.post("/product/create", async (req, res) => {
   const { itemName, price, totalQuantity } = req.body;
   const newProduct = new Product({
     itemName,
@@ -73,6 +90,24 @@ app.post("/product/create", isAuthenticated, async (req, res) => {
   });
   newProduct.save();
   return res.json(newProduct);
+});
+
+
+
+//  route to get product by id
+app.get("/product/:id", async (req, res) => {
+  const id = req.params.id;
+  let product;
+  try {
+    product = await Product.findById(id);
+  } catch (error) {
+    console.log(err);
+  }
+
+  if (!product) {
+    return res.status(404).json({ message: "No devices found" });
+  }
+  return res.status(200).json({ product });
 });
 
 // connecting to MongoDB

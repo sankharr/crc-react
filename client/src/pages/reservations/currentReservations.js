@@ -58,7 +58,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const URL = "http://localhost:5000/reservations";
+const URL = "http://localhost:9090/reservation";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
