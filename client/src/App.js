@@ -11,6 +11,12 @@ import {
 } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import axios from "axios";
+// routes
+import Router from './routes';
+// theme
+import ThemeProvider from './theme';
+import ScrollToTop from './components/ScrollToTop';
+import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
 
 const URL = "http://localhost:5000/reservations";
 
@@ -26,7 +32,7 @@ export default function App() {
   const [posts, setPosts ] = useState([]);
 
   useEffect(() => {
-    navigateToPage()
+    // navigateToPage()
 
   }, [navigatePath])
 
@@ -51,11 +57,16 @@ export default function App() {
 
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <Navbar menuName={menuName} />
-      <Sidebar />
-      <ContentBody />
-    </Box>
+    <ThemeProvider>
+      <ScrollToTop />
+      <BaseOptionChartStyle />
+      <Router />
+    </ThemeProvider>
+    // <Box sx={{ display: 'flex' }}>
+    //   <CssBaseline />
+    //   <Navbar menuName={menuName} />
+    //   <Sidebar />
+    //   <ContentBody />
+    // </Box>
   );
 }

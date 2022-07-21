@@ -147,6 +147,7 @@ const CreateReservation = (props) => {
                     id="itemName"
                     type="text"
                     label="Item Name"
+                    data-testid="itemName"
                     error={
                       formik.touched.itemName && formik.errors.itemName
                         ? true

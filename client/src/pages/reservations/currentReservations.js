@@ -38,7 +38,7 @@ import "./reservations.css";
 import { red } from "@mui/material/colors";
 import InputAdornment from "@mui/material/InputAdornment";
 import Search from "@mui/icons-material/Search";
-import CreateReservation from "./createReservation";
+import CreateReservation from "./CreateReservation";
 import Add from "@mui/icons-material/Add";
 import { connect } from "react-redux";
 // import { updateNavigatePath } from '../shared/sidebar/sidebarSlice'
