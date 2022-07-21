@@ -90,9 +90,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
                 {name}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              {/* <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 UndefinedYet
-              </Typography>
+              </Typography> */}
             </Box>
           </AccountStyle>
         </Link>

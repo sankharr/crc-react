@@ -12,25 +12,25 @@ const navConfig = [
 //     icon: getIcon('eva:pie-chart-2-fill'),
 //   },
   {
-    title: 'requests',
-    path: '/requests',
+    title: 'Current Reservations',
+    path: '/currentReservations',
     icon: getIcon('eva:list-fill'),
   },
-//   {
-//     title: 'settings',
-//     path: '/settings',
-//     icon: getIcon('eva:settings-fill'),
-//   },
-//   {
-//     title: 'user',
-//     path: '/user',
-//     icon: getIcon('eva:people-fill'),
-//   },
-//   {
-//     title: 'product',
-//     path: '/products',
-//     icon: getIcon('eva:shopping-bag-fill'),
-//   },
+  {
+    title: 'Past Reservations',
+    path: '/pastReservations',
+    icon: getIcon('eva:people-fill'),
+  },
+  {
+    title: 'Inventory',
+    path: '/deviceBrowser',
+    icon: getIcon('eva:shopping-bag-fill'),
+  },
+  {
+    title: 'settings',
+    path: '/settings',
+    icon: getIcon('eva:settings-fill'),
+  },
 //   {
 //     title: 'blog',
 //     path: '/blog',

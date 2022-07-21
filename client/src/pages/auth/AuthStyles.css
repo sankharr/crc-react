@@ -1,0 +1,43 @@
+/* img {
+    height: 150;
+    imgstyle={{height: '150%', backgroundPosition: '', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}
+} */
+
+.sidePictureLogin {
+    background-image: url("../../assets/login_bg.jpeg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: aliceblue;
+
+    /* back */
+}
+
+.sidePictureRegister {
+    background-image: url("../../assets/register_bg.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: aliceblue;
+    text-shadow: 1px 1px 3px black;
+
+    /* back */
+}
+
+.alert {
+    position: absolute;
+    top: 5vh;
+    left: 40vw;
+    width: 35vw;
+}
+
+@media screen and (max-width: 844px) {
+    .alert {
+        /* position: absolute; */
+        left: 10%;
+        width: 80vw;
+    }
+    
+}

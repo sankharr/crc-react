@@ -48,6 +48,7 @@ export default function Router() {
       children: [
         { path: '/', element: <Navigate to="/login" /> },
         { path: 'login', element: <Login /> },
+        { path: 'login/:message', element: <Login /> },
         { path: 'register', element: <Register /> },
         // { path: 'pharmacyRegister', element: <RegisterPharmacy /> },
         // { path: '404', element: <NotFound /> },

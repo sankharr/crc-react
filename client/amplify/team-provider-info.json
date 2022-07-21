@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-camerarentclubdev-dev-185310-authRole",
+      "UnauthRoleArn": "arn:aws:iam::923406011381:role/amplify-camerarentclubdev-dev-185310-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::923406011381:role/amplify-camerarentclubdev-dev-185310-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-camerarentclubdev-dev-185310-deployment",
+      "UnauthRoleName": "amplify-camerarentclubdev-dev-185310-unauthRole",
+      "StackName": "amplify-camerarentclubdev-dev-185310",
+      "StackId": "arn:aws:cloudformation:us-east-1:923406011381:stack/amplify-camerarentclubdev-dev-185310/467d93e0-08f8-11ed-a9fc-0ec0912b7293",
+      "AmplifyAppId": "d21efpxv8civew"
+    },
+    "categories": {
+      "auth": {
+        "camerarentclubdev91d058cc91d058cc": {}
+      }
+    }
+  }
+}
