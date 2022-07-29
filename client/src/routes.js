@@ -7,8 +7,8 @@ import Register from './pages/auth/Register';
 import AddDevice from './pages/devices/addDevice';
 import DeviceBrowser from './pages/devices/deviceBrowser';
 import CreateReservation from './pages/reservations/CreateReservation';
-import CurrentReservations from './pages/reservations/currentReservations';
-import PastReservations from './pages/reservations/pastReservations';
+import CurrentReservations from './pages/reservations/CurrentReservations/CurrentReservations';
+import PastReservations from './pages/reservations/PastReservations/PastReservations';
 import ReservationCalendar from './pages/reservations/reservationCalendar';
 import Settings from './pages/settings';
 //
